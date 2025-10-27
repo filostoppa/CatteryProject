@@ -33,7 +33,7 @@ namespace TestDomain
             PhoneNumber phoneNumber = new PhoneNumber("1234567890");
             FiscalCode fiscalCode = new FiscalCode("JHNDOE80A01H501U");
             Adopter adopter = new Adopter("John", "Doe", email, phoneNumber, fiscalCode, "New York", new Cap("10001"));
-            Adoption adoption = new Adoption(cat, new DateOnly(2025, 10, 20), adopter); 
+            Adoption adoption = new Adoption(cat, new DateOnly(2025, 10, 20), adopter);
             adoption.CancelAdoption();
             Assert.AreEqual(Adoption.AdoptionStatus.Cancelled, adoption.Status);
         }
@@ -49,11 +49,5 @@ namespace TestDomain
             adoption.CancelAdoption();
             Assert.ThrowsException<InvalidOperationException>(() => adoption.CancelAdoption());
         }
-        [TestMethod]
-        public void Adoption_AdoptionDateBeforeArrivalDate_ThrowsException()
-        {
-            Cat cat = new Cat("Romeo", "Siamese", true, new DateOnly(2025, 11, 19), new DateOnly(2025, 10, 20), new DateOnly(2025, 07, 2), "gatto colore arancione");
-            Email email = new Email("jhon.doe@gmail.com");
-            Adopter adopter = new Adopter("John","Doe",
-        }
     }
+}
