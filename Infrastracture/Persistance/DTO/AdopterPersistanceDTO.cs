@@ -1,20 +1,19 @@
-﻿using Domain.Model.ValueObjects;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Dto
+namespace Infrastracture.Persistance.DTO
 {
-    public record AdopterDTO
-    (
+    public record AdopterPersistanceDTO
+        (
         string? FirstName,
         string? LastName,
         string? Address,
         string? Phone,
-        string? FiscalCode, 
-        string? City, 
-        string? CityCap 
-    );
+        string? FiscalCode,
+        string? City,
+        string? CityCap
+        );
 }
