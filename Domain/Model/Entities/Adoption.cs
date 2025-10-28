@@ -7,13 +7,13 @@ using System.Windows; // Required for MessageBox
 
 namespace Domain.Model.Entities
 {
-    public enum AdoptionStatus
-    {
-        Completed,
-        Cancelled
-    }
     public class Adoption
     {
+        public enum AdoptionStatus
+        {
+            Completed,
+            Cancelled
+        }
         public Cat AdoptedCat { get; set; }
         public DateOnly AdoptionDate { get; set; }
         public Adopter AdopterData { get; set; }

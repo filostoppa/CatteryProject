@@ -1,5 +1,6 @@
 ﻿using Application.Dto;
 using Domain.Model.Entities;
+using Domain.Model.ValueObjects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,13 +11,31 @@ namespace Application.Mappers
 {
     public static class AdopterMapper
     {
-        public Adopter ToEntity(CatDTO dto)
+        public static Adopter ToEntity(this AdopterDTO dto)
         {
-            Adopter adopter = new Adopter
+            return new Adopter
                 (
-
+                firstName: dto.FirstName,
+                lastName: dto.LastName,
+                address: new Email(dto.Address),
+                phone: new PhoneNumber (dto.Phone),
+                fiscalCode: new FiscalCode(dto.FiscalCode),
+                city: dto.City,
+                cityCap: new Cap (dto.CityCap)
                 );
-            return adopter;
+        }
+        public static AdopterDTO ToDTO(this Adopter adopter)
+        {
+            return new AdopterDTO
+                (
+                FirstName: adopter.FirstName,
+                LastName: adopter.LastName,
+                Address: adopter.Address.ToString(),
+                Phone: adopter.Phone.ToString(),
+                FiscalCode: adopter.FiscalCode.ToString(),
+                City: adopter.City,
+                CityCap: adopter.CityCap.ToString()
+                );
         }
     }
 }

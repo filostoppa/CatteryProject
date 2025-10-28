@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Mappers
+namespace Application.UseCases
 {
-    internal class AdoprionMapper
+    public class CatteryService
     {
     }
 }
