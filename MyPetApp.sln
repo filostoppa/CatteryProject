@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastracture", "Infrastra
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UI Console", "UI Console\UI Console.csproj", "{BCE7DBCA-9683-4EE5-AB69-6CD75E25FBAB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestApplication", "TestApplication\TestApplication.csproj", "{EC5D89B6-8854-4D59-967A-EFFB8ACF1525}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -43,6 +45,10 @@ Global
 		{BCE7DBCA-9683-4EE5-AB69-6CD75E25FBAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BCE7DBCA-9683-4EE5-AB69-6CD75E25FBAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BCE7DBCA-9683-4EE5-AB69-6CD75E25FBAB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC5D89B6-8854-4D59-967A-EFFB8ACF1525}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC5D89B6-8854-4D59-967A-EFFB8ACF1525}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC5D89B6-8854-4D59-967A-EFFB8ACF1525}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC5D89B6-8854-4D59-967A-EFFB8ACF1525}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -53,6 +59,7 @@ Global
 		{57D5CE10-D6EF-4A93-9F14-FBAAFB3017E9} = {6C83A596-D32D-B35F-00DD-F0C99B673980}
 		{3B2B75B9-A4EB-4E46-9000-80226702DCA7} = {6C83A596-D32D-B35F-00DD-F0C99B673980}
 		{BCE7DBCA-9683-4EE5-AB69-6CD75E25FBAB} = {6C83A596-D32D-B35F-00DD-F0C99B673980}
+		{EC5D89B6-8854-4D59-967A-EFFB8ACF1525} = {E9AEF278-60A8-4AEA-AD86-8E18B26C19C4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1B2EB017-E105-4236-9F26-B8FE784E80D8}
