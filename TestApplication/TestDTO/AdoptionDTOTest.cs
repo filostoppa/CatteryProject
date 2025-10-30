@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Application.Dto;
 using Application.Mappers;
 using Domain.Model.Entities;
@@ -13,12 +9,12 @@ namespace TestApplication.TestDTO
     [TestClass]
     public class AdoptionDTOTest
     {
-        // Verifica che, usando i mapper pubblici, sia possibile costruire
-        // un'entità Adoption valida a partire dagli application DTO
+        // Verifica che la creazione di Adoption a partire da DTO (tramite mapper per cat e adopter)
+        // mantenga i campi principali correttamente.
         [TestMethod]
-        public void ToEntity_WithValidData_MaintainsMainFields()
+        public void CreateAdoption_FromValidDtos_MaintainsMainFields()
         {
-            // preparo DTO per cat e adopter
+            // Arrange - preparo DTO per cat e adopter
             CatDTO catDto = new CatDTO(
                 Name: "Romeo",
                 Breed: "Siamese",
@@ -41,30 +37,34 @@ namespace TestApplication.TestDTO
 
             DateOnly adoptionDate = new DateOnly(2025, 10, 20);
 
-            // uso i mapper pubblici per ottenere entità e creo Adoption
+            // Act - converto DTO in entità e costruisco Adoption
             Cat catEntity = CatMapper.ToEntity(catDto);
-            Adopter adopterEntity = adopterDto.ToEntity();
+            Adopter adopterEntity = AdopterMapper.ToEntity(adopterDto);
             Adoption adoption = new Adoption(catEntity, adoptionDate, adopterEntity);
 
-            // controllo campi principali
-            Assert.AreEqual(catEntity, adoption.AdoptedCat);
+            // Assert - controlli sui campi principali
+            Assert.IsNotNull(adoption.AdoptedCat);
+            Assert.AreEqual("Romeo", adoption.AdoptedCat.Name);
+            Assert.AreEqual("Siamese", adoption.AdoptedCat.Breed);
             Assert.AreEqual(adoptionDate, adoption.AdoptionDate);
-            Assert.AreEqual(adopterEntity, adoption.AdopterData);
+            Assert.IsNotNull(adoption.AdopterData);
+            Assert.AreEqual("John", adoption.AdopterData.FirstName);
+            Assert.AreEqual("Doe", adoption.AdopterData.LastName);
             Assert.AreEqual(Adoption.AdoptionStatus.Completed, adoption.Status);
         }
 
-        // Verifica che una data di adozione antecedente all'arrivo del gatto lanci eccezione
+        // Verifica che creare un'adozione con data precedente all'arrivo del gatto lanci ArgumentException
         [TestMethod]
         public void CreateAdoption_DateBeforeArrival_ThrowsArgumentException()
         {
-            // gatto con arrival dopo la data di adozione
+            // Arrange - gatto con arrival dopo la data di adozione
             CatDTO catDto = new CatDTO(
                 Name: "Gina",
                 Breed: "Europeo",
                 IsMale: false,
                 BirthDate: new DateOnly(2024, 1, 1),
                 DepartureDate: null,
-                ArrivalDate: new DateOnly(2025, 12, 1), // arriva il 1 dic 2025
+                ArrivalDate: new DateOnly(2025, 12, 1),
                 Description: "Gatta dolce"
             );
 
@@ -80,18 +80,18 @@ namespace TestApplication.TestDTO
 
             DateOnly adoptionDate = new DateOnly(2025, 11, 30); // prima dell'arrivo
 
-            // la costruzione dell'entità Adoption deve fallire
+            // Act & Assert
             Cat catEntity = CatMapper.ToEntity(catDto);
-            Adopter adopterEntity = adopterDto.ToEntity();
+            Adopter adopterEntity = AdopterMapper.ToEntity(adopterDto);
 
             Assert.ThrowsException<ArgumentException>(() => new Adoption(catEntity, adoptionDate, adopterEntity));
         }
 
-        // verifica il comportamento di CancelAdoption: prima imposta cancelled, poi rilancia se già cancellata
+        // Verifica comportamento di CancelAdoption: prima imposta cancelled, poi la seconda chiamata lancia InvalidOperationException
         [TestMethod]
         public void CancelAdoption_DoubleCall_FirstSucceeds_SecondThrows()
         {
-            // dati validi
+            // Arrange - dati validi
             CatDTO catDto = new CatDTO(
                 Name: "Micio",
                 Breed: "Persiano",
@@ -101,7 +101,6 @@ namespace TestApplication.TestDTO
                 ArrivalDate: new DateOnly(2024, 6, 1),
                 Description: "Molto tranquillo"
             );
-
             AdopterDTO adopterDto = new AdopterDTO(
                 FirstName: "Mario",
                 LastName: "Bianchi",
@@ -111,19 +110,23 @@ namespace TestApplication.TestDTO
                 City: "Milano",
                 CityCap: "20100"
             );
-
             DateOnly adoptionDate = new DateOnly(2024, 7, 1);
-
             Cat catEntity = CatMapper.ToEntity(catDto);
-            Adopter adopterEntity = adopterDto.ToEntity();
+            Adopter adopterEntity = AdopterMapper.ToEntity(adopterDto);
             Adoption adoption = new Adoption(catEntity, adoptionDate, adopterEntity);
 
-            // prima cancellazione
+            // Verifica stato iniziale
+            Assert.AreEqual(Adoption.AdoptionStatus.Completed, adoption.Status);
+
+            // Act - prima cancellazione
             adoption.CancelAdoption();
+
+            // Assert - verifica che sia stata cancellata
             Assert.AreEqual(Adoption.AdoptionStatus.Cancelled, adoption.Status);
 
-            // seconda cancellazione deve lanciare InvalidOperationException
-            Assert.ThrowsException<InvalidOperationException>(() => adoption.CancelAdoption());
+            // Act & Assert - seconda cancellazione deve lanciare InvalidOperationException
+            var exception = Assert.ThrowsException<InvalidOperationException>(() => adoption.CancelAdoption());
+            Assert.IsNotNull(exception.Message); // Opzionale: verifica che ci sia un messaggio
         }
     }
 }

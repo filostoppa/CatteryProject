@@ -35,7 +35,6 @@ namespace Domain.Model.Entities
             if (Status == AdoptionStatus.Cancelled)
             {
                 throw new InvalidOperationException("The adoption is already cancelled.");
-                return;
             }
             Status = AdoptionStatus.Cancelled;
         }

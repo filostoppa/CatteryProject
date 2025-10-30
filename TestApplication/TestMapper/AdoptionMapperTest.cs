@@ -1,11 +1,13 @@
-﻿using System;
+﻿using Application.Dto;
+using Application.Mappers;
+using Domain.Model.Entities;
+using Domain.Model.ValueObjects;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Application.Dto;
-using Application.Mappers;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace TestApplication
 {
@@ -15,7 +17,6 @@ namespace TestApplication
         [TestMethod]
         public void Mapping_Preserves_MainFields()
         {
-            // preparo DTO per cat e adopter
             CatDTO catDto = new CatDTO(
                 Name: "Romeo",
                 Breed: "Siamese",
@@ -43,29 +44,24 @@ namespace TestApplication
                 Status: true
             );
 
-            AdoptionDTO mapped = AdoptionMapper.ToEntity(dto);
-            AdoptionDTO dtoBack = mapped.ToDTO();
-
-            // verifica campi principali
-            Assert.AreEqual(dto.AdoptionDate, mapped.AdoptionDate);
-            Assert.AreEqual(dto.Status, mapped.Status);
-
-            Assert.IsNotNull(mapped.AdoptedCat);
-            Assert.AreEqual(dto.AdoptedCat.Name, mapped.AdoptedCat.Name);
-            Assert.AreEqual(dto.AdoptedCat.Breed, mapped.AdoptedCat.Breed);
-
-            Assert.IsNotNull(mapped.AdopterData);
-            Assert.AreEqual(dto.AdopterData.FirstName, mapped.AdopterData.FirstName);
-            Assert.AreEqual(dto.AdopterData.LastName, mapped.AdopterData.LastName);
+            // DTO -> domain entity -> DTO
+            Adoption entity = AdoptionMapper.ToEntity(dto);
+            AdoptionDTO dtoBack = entity.ToDTO();
 
             Assert.AreEqual(dto.AdoptionDate, dtoBack.AdoptionDate);
             Assert.AreEqual(dto.Status, dtoBack.Status);
+            Assert.IsNotNull(dtoBack.AdoptedCat);
+            Assert.AreEqual(dto.AdoptedCat.Name, dtoBack.AdoptedCat.Name);
+            Assert.AreEqual(dto.AdoptedCat.Breed, dtoBack.AdoptedCat.Breed);
+            Assert.IsNotNull(dtoBack.AdopterData);
+            Assert.AreEqual(dto.AdopterData.FirstName, dtoBack.AdopterData.FirstName);
+            Assert.AreEqual(dto.AdopterData.LastName, dtoBack.AdopterData.LastName);
         }
 
         [TestMethod]
-        public void Mapping_SupportsNullFields()
+        public void Mapping_NullFields_ThrowsArgumentNullException()
         {
-            // DTO con campi null per cat e adopter
+            // DTO con campi null: il dominio richiede cat e adopter validi => mapper lancia
             AdoptionDTO dto = new AdoptionDTO(
                 AdoptedCat: null,
                 AdoptionDate: new DateOnly(2025, 1, 1),
@@ -73,18 +69,7 @@ namespace TestApplication
                 Status: false
             );
 
-            AdoptionDTO mapped = AdoptionMapper.ToEntity(dto);
-            AdoptionDTO dtoBack = mapped.ToDTO();
-
-            // campi null 
-            Assert.IsNull(mapped.AdoptedCat);
-            Assert.IsNull(mapped.AdopterData);
-            Assert.AreEqual(dto.Status, mapped.Status);
-            Assert.AreEqual(dto.AdoptionDate, mapped.AdoptionDate);
-
-            Assert.IsNull(dtoBack.AdoptedCat);
-            Assert.IsNull(dtoBack.AdopterData);
-            Assert.AreEqual(dtoBack.Status, dto.Status);
+            Assert.ThrowsException<ArgumentNullException>(() => AdoptionMapper.ToEntity(dto));
         }
 
         [TestMethod]
@@ -112,13 +97,11 @@ namespace TestApplication
 
             AdoptionDTO original = new AdoptionDTO(catDto, new DateOnly(2024, 7, 1), adopterDto, true);
 
-            AdoptionDTO mid = AdoptionMapper.ToEntity(original);
-            AdoptionDTO finalDto = mid.ToDTO();
+            Adoption entity = AdoptionMapper.ToEntity(original);
+            AdoptionDTO finalDto = entity.ToDTO();
 
-            // tutti i campi principali coincidono
             Assert.AreEqual(original.AdoptionDate, finalDto.AdoptionDate);
             Assert.AreEqual(original.Status, finalDto.Status);
-
             Assert.IsNotNull(finalDto.AdoptedCat);
             Assert.AreEqual(original.AdoptedCat.Name, finalDto.AdoptedCat.Name);
             Assert.AreEqual(original.AdopterData.FirstName, finalDto.AdopterData.FirstName);
