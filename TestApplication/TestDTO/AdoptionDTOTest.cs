@@ -106,7 +106,7 @@ namespace TestApplication.TestDTO
                 LastName: "Bianchi",
                 Address: "mario.bianchi@example.com",
                 Phone: "333222111",
-                FiscalCode: "MRBNC80A01H501U",
+                FiscalCode: "MRBNC80A01H501U1",
                 City: "Milano",
                 CityCap: "20100"
             );

@@ -5,19 +5,18 @@ using Domain.Model.ValueObjects;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 
-namespace TestApplication.TestApplication
+namespace TestApplication
 {
     [TestClass]
     public class AdopterMapperTest
     {
-        // Verifica che il mapper costruisca correttamente l'entità con i value object
         [TestMethod]
-        public void ToEntity_ValidDto_CreatesAdopterWithCorrectValueObjects()
+        public void ToEntity_WithValidDto_CreatesAdopterWithCorrectValueObjects()
         {
             AdopterDTO dto = new AdopterDTO(
                 FirstName: "John",
                 LastName: "Doe",
-                Address: "john.doe@example.com",
+                Address: "john@doe.com",
                 Phone: "1234567890",
                 FiscalCode: "JHNDOE80A01H501U",
                 City: "New York",
@@ -26,7 +25,7 @@ namespace TestApplication.TestApplication
 
             Adopter entity = AdopterMapper.ToEntity(dto);
 
-            // campi semplici
+            // controllo i campi semplici
             Assert.AreEqual(dto.FirstName, entity.FirstName);
             Assert.AreEqual(dto.LastName, entity.LastName);
             Assert.AreEqual(dto.City, entity.City);
@@ -38,9 +37,8 @@ namespace TestApplication.TestApplication
             Assert.AreEqual(dto.CityCap, entity.CityCap.Value);
         }
 
-        // verifica che il mapper converta l'entità in DTO correttamente
         [TestMethod]
-        public void ToDTO_ValidEntity_ReturnsDtoWithExpectedStrings()
+        public void ToDTO_WithValidEntity_ReturnsDtoWithMainFields()
         {
             // creo l'entità di dominio direttamente
             Email email = new Email("anna@dominio.com");
@@ -60,21 +58,20 @@ namespace TestApplication.TestApplication
 
             AdopterDTO dto = AdopterMapper.ToDTO(entity);
 
-            // campi semplici preservati
+            // campi semplici 
             Assert.AreEqual(entity.FirstName, dto.FirstName);
             Assert.AreEqual(entity.LastName, dto.LastName);
             Assert.AreEqual(entity.City, dto.City);
 
-            // i mapper producono stringhe che contengono i value object; verifichiamo che contengano il valore
+            // I mapper usano ToString() sui value objects: verifichiamo che la stringa DTO contenga il valore
             Assert.IsTrue(dto.Address.Contains(entity.Address.Value));
             Assert.IsTrue(dto.Phone.Contains(entity.Phone.Value));
             Assert.IsTrue(dto.FiscalCode.Contains(entity.FiscalCode.Value));
             Assert.IsTrue(dto.CityCap.Contains(entity.CityCap.Value));
         }
 
-        // email non valida deve provocare eccezione dal value object Email
         [TestMethod]
-        public void ToEntity_InvalidEmail_ThrowsArgumentExceptionOrNull()
+        public void ToEntity_WithInvalidEmail_ThrowsException()
         {
             // email senza '@'
             AdopterDTO dto = new AdopterDTO(
@@ -87,25 +84,11 @@ namespace TestApplication.TestApplication
                 CityCap: "10001"
             );
 
-            // email può lanciare ArgumentNullException o ArgumentException a seconda del caso
-            try
-            {
-                AdopterMapper.ToEntity(dto);
-                Assert.Fail("Expected exception was not thrown.");
-            }
-            catch (ArgumentNullException)
-            {
-                // OK
-            }
-            catch (ArgumentException)
-            {
-                // OK
-            }
+            Assert.ThrowsException<ArgumentNullException>(() => AdopterMapper.ToEntity(dto));
         }
 
-        // telefono non valido deve lanciare ArgumentException
         [TestMethod]
-        public void ToEntity_InvalidPhone_ThrowsArgumentException()
+        public void ToEntity_WithInvalidPhone_ThrowsException()
         {
             // telefono non numerico
             AdopterDTO dto = new AdopterDTO(
@@ -121,9 +104,8 @@ namespace TestApplication.TestApplication
             Assert.ThrowsException<ArgumentException>(() => AdopterMapper.ToEntity(dto));
         }
 
-        // fiscal code non valido deve lanciare ArgumentException
         [TestMethod]
-        public void ToEntity_InvalidFiscalCode_ThrowsArgumentException()
+        public void ToEntity_WithInvalidFiscalCode_ThrowsException()
         {
             // fiscal code corto o non conforme
             AdopterDTO dto = new AdopterDTO(
@@ -139,9 +121,8 @@ namespace TestApplication.TestApplication
             Assert.ThrowsException<ArgumentException>(() => AdopterMapper.ToEntity(dto));
         }
 
-        // CAP non valido deve lanciare ArgumentException
         [TestMethod]
-        public void ToEntity_InvalidCap_ThrowsArgumentException()
+        public void ToEntity_WithInvalidCap_ThrowsException()
         {
             // CAP non a 5 cifre
             AdopterDTO dto = new AdopterDTO(
