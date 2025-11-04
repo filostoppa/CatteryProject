@@ -8,14 +8,14 @@ namespace TestApplication.TestDTO
     public class PhoneNumberDTOTest
     {
         [TestMethod]
-        public void Create_WithValue_SetsValue()
+        public void Create_ConValore_ImpostaValue()
         {
             var dto = new PhoneNumberDTO { value = "333222111" };
             Assert.AreEqual("333222111", dto.value);
         }
 
         [TestMethod]
-        public void Create_Default_HasNullValue()
+        public void Create_SenzaValore_HaValueNull()
         {
             var dto = new PhoneNumberDTO();
             Assert.IsNull(dto.value);

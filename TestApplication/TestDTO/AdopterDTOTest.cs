@@ -13,7 +13,7 @@ namespace TestApplication.TestDTO
         // Test per verificare che la conversione da DTO a Entity e viceversa
         // mantenga correttamente tutti i dati
         [TestMethod]
-        public void BidirectionalConversion_WithValidData_MaintainsAllFields()
+        public void ConversioneBidirezionale_DatiValidi_MantieneTuttiICampi()
         {
             // preparo un DTO con tutti i dati
             AdopterDTO dtoOriginale = new AdopterDTO(
@@ -58,7 +58,7 @@ namespace TestApplication.TestDTO
 
         // Test per verificare che un nome vuoto lanci un'eccezione
         [TestMethod]
-        public void ConversionToEntity_WithEmptyFirstName_ThrowsException()
+        public void ToEntity_NomeVuoto_LanciaArgumentNullException()
         {
             // creo un DTO con nome vuoto
             AdopterDTO dto = new AdopterDTO(
@@ -77,7 +77,7 @@ namespace TestApplication.TestDTO
 
         // Test per verificare che un cognome vuoto lanci un'eccezione
         [TestMethod]
-        public void ConversionToEntity_WithEmptyLastName_ThrowsException()
+        public void ToEntity_CognomeVuoto_LanciaArgumentNullException()
         {
             // creo un DTO con cognome vuoto
             AdopterDTO dto = new AdopterDTO(
@@ -96,7 +96,7 @@ namespace TestApplication.TestDTO
 
         // Test per verificare che un nome null lanci un'eccezione
         [TestMethod]
-        public void ConversionToEntity_WithNullFirstName_ThrowsException()
+        public void ToEntity_NomeNull_LanciaArgumentNullException()
         {
             // creo un DTO con nome null
             AdopterDTO dto = new AdopterDTO(
@@ -115,7 +115,7 @@ namespace TestApplication.TestDTO
 
         // Test per verificare che un cognome null lanci un'eccezione
         [TestMethod]
-        public void ConversionToEntity_WithNullLastName_ThrowsException()
+        public void ToEntity_CognomeNull_LanciaArgumentNullException()
         {
             // creo un DTO con cognome null
             AdopterDTO dto = new AdopterDTO(
@@ -134,7 +134,7 @@ namespace TestApplication.TestDTO
 
         // Test per verificare che un indirizzo vuoto lanci un'eccezione
         [TestMethod]
-        public void ConversionToEntity_WithEmptyAddress_ThrowsException()
+        public void ToEntity_IndirizzoVuoto_LanciaArgumentNullException()
         {
             // creo un DTO con indirizzo vuoto
             AdopterDTO dto = new AdopterDTO(
@@ -153,7 +153,7 @@ namespace TestApplication.TestDTO
 
         // Test per verificare che un telefono vuoto lanci un'eccezione
         [TestMethod]
-        public void ConversionToEntity_WithEmptyPhone_ThrowsException()
+        public void ToEntity_TelefonoVuoto_LanciaArgumentNullException()
         {
             // creo un DTO con telefono vuoto
             AdopterDTO dto = new AdopterDTO(
@@ -172,7 +172,7 @@ namespace TestApplication.TestDTO
 
         // Test per verificare che un codice fiscale vuoto lanci un'eccezione
         [TestMethod]
-        public void ConversionToEntity_WithEmptyFiscalCode_ThrowsException()
+        public void ToEntity_CodiceFiscaleVuoto_LanciaArgumentOutOfRangeException()
         {
             // creo un DTO con codice fiscale vuoto
             AdopterDTO dto = new AdopterDTO(

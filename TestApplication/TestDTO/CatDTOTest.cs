@@ -12,7 +12,7 @@ namespace TestApplication.TestDTO
         // test per verificare che la conversione da DTO a Entity e viceversa
         // mantenga correttamente tutti i dati
         [TestMethod]
-        public void BidirectionalConversion_WithValidData_MaintainsAllFields()
+        public void ConversioneBidirezionale_DatiValidi_MantieneTuttiICampi()
         {
             // preparo un DTO con tutti i dati
             CatDTO dto = new CatDTO(
@@ -40,7 +40,7 @@ namespace TestApplication.TestDTO
 
         // Test per verificare che un nome vuoto lanci un'eccezione
         [TestMethod]
-        public void ConversionToEntity_WithEmptyName_ThrowsException()
+        public void ToEntity_NomeVuoto_LanciaArgumentOutOfRangeException()
         {
             // creo un DTO con nome vuoto
             CatDTO dto = new CatDTO(
@@ -58,7 +58,7 @@ namespace TestApplication.TestDTO
 
         // Test per verificare che una razza vuota lanci un'eccezione
         [TestMethod]
-        public void ConversionToEntity_WithEmptyBreed_ThrowsException()
+        public void ToEntity_RazzaVuota_LanciaArgumentOutOfRangeException()
         {
             CatDTO dto = new CatDTO(
                 Name: "Romeo",
@@ -75,7 +75,7 @@ namespace TestApplication.TestDTO
 
         // Test per verificare che un nome null lanci un'eccezione
         [TestMethod]
-        public void ConversionToEntity_WithNullName_ThrowsException()
+        public void ToEntity_NomeNull_LanciaArgumentOutOfRangeException()
         {
             CatDTO dto = new CatDTO(
                 Name: null,

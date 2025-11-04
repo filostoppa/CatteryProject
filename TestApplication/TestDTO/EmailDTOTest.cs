@@ -8,14 +8,14 @@ namespace TestApplication.TestDTO
     public class EmailDTOTest
     {
         [TestMethod]
-        public void Create_WithValue_SetsValue()
+        public void Create_ConValore_ImpostaValue()
         {
             var dto = new EmailDTO { value = "user@example.com" };
             Assert.AreEqual("user@example.com", dto.value);
         }
 
         [TestMethod]
-        public void Create_Default_HasNullValue()
+        public void Create_SenzaValore_HaValueNull()
         {
             var dto = new EmailDTO();
             Assert.IsNull(dto.value);

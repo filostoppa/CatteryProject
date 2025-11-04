@@ -8,14 +8,14 @@ namespace TestApplication.TestDTO
     public class FiscalCodeDTOTest
     {
         [TestMethod]
-        public void Create_WithValue_SetsValue()
+        public void Create_ConValore_ImpostaValue()
         {
-            var dto = new FiscalCodeDTO { value = "ANNDOM80A01H501U" };
+            FiscalCodeDTO dto = new FiscalCodeDTO { value = "ANNDOM80A01H501U" };
             Assert.AreEqual("ANNDOM80A01H501U", dto.value);
         }
 
         [TestMethod]
-        public void Create_Default_HasNullValue()
+        public void Create_SenzaValore_HaValueNull()
         {
             var dto = new FiscalCodeDTO();
             Assert.IsNull(dto.value);

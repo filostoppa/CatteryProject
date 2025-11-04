@@ -8,14 +8,14 @@ namespace TestApplication.TestDTO
     public class CapDTOTest
     {
         [TestMethod]
-        public void Create_WithValue_SetsValue()
+        public void Create_ConValore_ImpostaValue()
         {
             var dto = new CapDTO { value = "00100" };
             Assert.AreEqual("00100", dto.value);
         }
 
         [TestMethod]
-        public void Create_Default_HasNullValue()
+        public void Create_SenzaValore_HaValueNull()
         {
             var dto = new CapDTO();
             Assert.IsNull(dto.value);

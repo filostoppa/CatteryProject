@@ -27,11 +27,10 @@ namespace TestApplication.TestApplication
                 Description: "Gatto colore arancione"
             );
 
-            // Act
             Cat entity = CatMapper.ToEntity(dto);
             CatDTO dtoBack = entity.ToDTO();
 
-            // Assert - campi principali preservati
+            // campi principali preservati
             Assert.AreEqual(dto.Name, entity.Name);
             Assert.AreEqual(dto.Breed, entity.Breed);
             Assert.AreEqual(dto.IsMale, entity.IsMale);
@@ -40,7 +39,7 @@ namespace TestApplication.TestApplication
             Assert.AreEqual(dto.BirthDate, entity.BirthDate);
             Assert.AreEqual(dto.Description, entity.Description);
 
-            // Assert mapping inverso
+            // mapping inverso
             Assert.AreEqual(dto.Name, dtoBack.Name);
             Assert.AreEqual(dto.Breed, dtoBack.Breed);
             Assert.AreEqual(dto.IsMale, dtoBack.IsMale);
@@ -54,7 +53,6 @@ namespace TestApplication.TestApplication
         [TestMethod]
         public void ToEntity_EmptyName_ThrowsArgumentOutOfRangeException()
         {
-            // Arrange
             CatDTO dto = new CatDTO(
                 Name: "",
                 Breed: "Siamese",
@@ -65,7 +63,6 @@ namespace TestApplication.TestApplication
                 Description: "desc"
             );
 
-            // Act & Assert
             Assert.ThrowsException<ArgumentOutOfRangeException>(() => CatMapper.ToEntity(dto));
         }
 
@@ -73,7 +70,6 @@ namespace TestApplication.TestApplication
         [TestMethod]
         public void ToEntity_EmptyBreed_ThrowsArgumentOutOfRangeException()
         {
-            // Arrange
             CatDTO dto = new CatDTO(
                 Name: "Romeo",
                 Breed: "",
@@ -84,7 +80,6 @@ namespace TestApplication.TestApplication
                 Description: "desc"
             );
 
-            // Act & Assert
             Assert.ThrowsException<ArgumentOutOfRangeException>(() => CatMapper.ToEntity(dto));
         }
 
@@ -92,7 +87,6 @@ namespace TestApplication.TestApplication
         [TestMethod]
         public void ToEntity_NullName_ThrowsArgumentOutOfRangeException()
         {
-            // Arrange
             CatDTO dto = new CatDTO(
                 Name: null,
                 Breed: "Siamese",
@@ -103,7 +97,6 @@ namespace TestApplication.TestApplication
                 Description: "desc"
             );
 
-            // Act & Assert
             Assert.ThrowsException<ArgumentOutOfRangeException>(() => CatMapper.ToEntity(dto));
         }
     }
