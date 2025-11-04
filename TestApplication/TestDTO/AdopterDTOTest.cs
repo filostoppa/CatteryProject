@@ -72,7 +72,7 @@ namespace TestApplication.TestDTO
             );
 
             // mi aspetto un errore
-            Assert.ThrowsException<ArgumentOutOfRangeException>(() => dto.ToEntity());
+            Assert.ThrowsException<ArgumentNullException>(() => dto.ToEntity());
         }
 
         // Test per verificare che un cognome vuoto lanci un'eccezione
@@ -91,7 +91,7 @@ namespace TestApplication.TestDTO
             );
 
             // mi aspetto un errore
-            Assert.ThrowsException<ArgumentOutOfRangeException>(() => dto.ToEntity());
+            Assert.ThrowsException<ArgumentNullException>(() => dto.ToEntity());
         }
 
         // Test per verificare che un nome null lanci un'eccezione
@@ -110,7 +110,7 @@ namespace TestApplication.TestDTO
             );
 
             // mi aspetto un errore
-            Assert.ThrowsException<ArgumentOutOfRangeException>(() => dto.ToEntity());
+            Assert.ThrowsException<ArgumentNullException>(() => dto.ToEntity());
         }
 
         // Test per verificare che un cognome null lanci un'eccezione
@@ -129,7 +129,7 @@ namespace TestApplication.TestDTO
             );
 
             // mi aspetto un errore
-            Assert.ThrowsException<ArgumentOutOfRangeException>(() => dto.ToEntity());
+            Assert.ThrowsException<ArgumentNullException>(() => dto.ToEntity());
         }
 
         // Test per verificare che un indirizzo vuoto lanci un'eccezione
@@ -148,7 +148,7 @@ namespace TestApplication.TestDTO
             );
 
             // mi aspetto un errore
-            Assert.ThrowsException<ArgumentOutOfRangeException>(() => dto.ToEntity());
+            Assert.ThrowsException<ArgumentNullException>(() => dto.ToEntity());
         }
 
         // Test per verificare che un telefono vuoto lanci un'eccezione
@@ -167,7 +167,7 @@ namespace TestApplication.TestDTO
             );
 
             // mi aspetto un errore
-            Assert.ThrowsException<ArgumentOutOfRangeException>(() => dto.ToEntity());
+            Assert.ThrowsException<ArgumentNullException>(() => dto.ToEntity());
         }
 
         // Test per verificare che un codice fiscale vuoto lanci un'eccezione
