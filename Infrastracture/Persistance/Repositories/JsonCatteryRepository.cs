@@ -8,7 +8,7 @@ using System.Text.Json;
 
 namespace Infrastracture.Persistance.Repositories
 {
-    internal class JsonCatteryRepository
+    public class JsonCatteryRepository
     {
         private readonly string _dataFolder;
         private readonly JsonSerializerOptions _serializerOptions;
