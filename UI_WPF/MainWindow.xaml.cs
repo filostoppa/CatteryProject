@@ -8,6 +8,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Application.UseCases;
 
 namespace UI_WPF
 {
@@ -20,5 +21,19 @@ namespace UI_WPF
         {
             InitializeComponent();
         }
+
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+        private void RefreshTotalCatsNumber()
+        {
+            TxtBlockNumeroGattiTotali.Text = $"Gatti totali: {new CatService().GetAllCats().Count}";
+        }
+        private void MaleCatsCounter()
+        {
+
+        }
+
     }
 }

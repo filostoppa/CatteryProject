@@ -9,12 +9,12 @@ using System.Threading.Tasks;
 
 namespace Application.UseCases
 {
-    public class CatteryService
+    public class CatService
     {
         private readonly List<Cat> _cats;
 
         // Creo la lista dei gatti
-        public CatteryService()
+        public CatService()
         {
             _cats = new List<Cat>();
         }
@@ -114,5 +114,6 @@ namespace Application.UseCases
             }
             return false;
         }
+
     }
 }

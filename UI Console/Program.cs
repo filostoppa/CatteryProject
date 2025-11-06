@@ -10,7 +10,7 @@ namespace UI_Console
         static void Main(string[] args)
         {
             JsonCatteryRepository jsonCattery = new JsonCatteryRepository();
-            CatteryService catteryService = new CatteryService();
+            CatService catteryService = new CatService();
             DateOnly arrivedDate = DateOnly.FromDateTime(DateTime.Now);
             DateOnly? birthDate = DateOnly.FromDateTime(new DateTime(2020, 5, 1));
             DateOnly? adoptedDate = null;

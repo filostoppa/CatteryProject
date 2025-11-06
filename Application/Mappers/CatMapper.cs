@@ -10,7 +10,7 @@ namespace Application.Mappers
 {
     public static class CatMapper
     {
-        public static Cat ToEntity(CatDTO dto)
+        public static Cat ToEntity(this CatDTO dto)
         {
             return new Cat
                 (
