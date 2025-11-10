@@ -2,13 +2,13 @@
 using System.Data;
 using System.Windows;
 
-namespace UI_WPF
+namespace Presentation_UI
 {
     /// <summary>
-    /// Logica di interazione per App.xaml
+    /// Interaction logic for App.xaml
     /// </summary>
-    public partial class App : Application
+    public partial class App : System.Windows.Application
     {
-
     }
+
 }
