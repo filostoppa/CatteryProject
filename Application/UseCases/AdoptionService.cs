@@ -53,6 +53,7 @@ namespace Application.UseCases
             }
             return null;
         }
+
         public Adoption? GetByAdopterFiscalCode(string fiscalCode)
         {
             if (string.IsNullOrWhiteSpace(fiscalCode))
