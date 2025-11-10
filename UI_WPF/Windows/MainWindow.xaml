@@ -8,29 +8,27 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <Menu HorizontalAlignment="Left" Height="50" VerticalAlignment="Top" Width="273" Background="#FF032050" FontWeight="Bold" FontSize="24" FontStyle="Italic" Foreground="White">
-            <MenuItem Header="Menu Gatti">
-                <Button Content="Aggiungi Gatto" Click="AddCat"/>
-                <Button Content="Gestisci Gatti" Click="ManageCat"/>
+            <MenuItem Header="Menu Gatti" Click="MenuItem_Click">
+                <Button Click="AddCatButton_Click"/>
+                <Button Click="ManageCatButton_Click"/>
             </MenuItem>
         </Menu>
         <Menu HorizontalAlignment="Center" Height="50" VerticalAlignment="Top" Width="254" Background="#FF032050" FontWeight="Bold" FontSize="24" FontStyle="Italic">
             <MenuItem Header="Menu Adozioni" Foreground="White" Click="MenuItem_Click">
-                <Button Content="Aggiungi Adozione" Click="AddAdoption"/>
-                <Button Content="Gestisci Gatti" Click="ManageAdoptions"/>
+                <Button Click="AddAdoptionButton_Click"/>
+                <Button Click="ManageAdoptionButton_Click"/>
             </MenuItem>
-            
         </Menu>
         <Menu HorizontalAlignment="Left" Height="50" VerticalAlignment="Top" Width="273" Background="#FF032050" FontWeight="Bold" FontSize="24" FontStyle="Italic" Margin="527,0,0,0" Foreground="White">
             <MenuItem Header="Menu Adottanti">
-                <Button Content="Aggiungi Adottante" Click="AddAdopter"/>
-                <Button Content="Gestisci Gatti" Click="ManageAdopter"/>
-                </MenuItem>
-
+                <Button Click="AddAdopterButton_Click"/>
+                <Button Click="ManageAdopterButton_Click"/>
+            </MenuItem>
         </Menu>
-            <Label Content="Numero Gatti Maschi:" HorizontalAlignment="Left" Height="44" Margin="36,115,0,0" VerticalAlignment="Top" Width="237" FontWeight="Bold" FontSize="22"/>
+        <Label Content="Numero Gatti Maschi:" HorizontalAlignment="Left" Height="44" Margin="36,115,0,0" VerticalAlignment="Top" Width="237" FontWeight="Bold" FontSize="22"/>
         <Label Content="Numero Gatti Femmine:" HorizontalAlignment="Left" Height="44" Margin="36,159,0,0" VerticalAlignment="Top" Width="257" FontWeight="Bold" FontSize="22"/>
         <Label Content="Numero Gatti Totali:" HorizontalAlignment="Left" Height="44" Margin="36,203,0,0" VerticalAlignment="Top" Width="237" FontWeight="Bold" FontSize="22"/>
-        <TextBlock x:Name="TxtBlockNumeroGattiMaschi" HorizontalAlignment="Left" Height="39" Margin="278,120,0,0" TextWrapping="Wrap" Text="{Binding CatDTOList.Count}" VerticalAlignment="Top" Width="216" FontWeight="Bold" FontSize="22"/>
+        <TextBlock x:Name="TxtBlockNumeroGattiMaschi" HorizontalAlignment="Left" Height="39" Margin="278,120,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Width="216" FontWeight="Bold" FontSize="22"/>
         <TextBlock x:Name="TxtBlockNumeroGattiFemmine" HorizontalAlignment="Center" Height="39" Margin="0,164,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Width="216" FontWeight="Bold" FontSize="22"/>
         <TextBlock x:Name="TxtBlockNumeroGattiTotali" HorizontalAlignment="Left" Height="39" Margin="259,208,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Width="216" FontWeight="Bold" FontSize="22"/>
     </Grid>

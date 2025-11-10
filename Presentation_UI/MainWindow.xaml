@@ -1,0 +1,55 @@
+﻿<Window x:Class="UI_WPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:UI_WPF"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Menu HorizontalAlignment="Left" Height="50" VerticalAlignment="Top" Width="273" Background="#FF032050" FontWeight="Bold" FontSize="24" FontStyle="Italic" Foreground="White">
+<<<<<<< HEAD:UI_WPF/MainWindow.xaml
+            <MenuItem Header="Menu Gatti">
+                <Button Content="Aggiungi Gatto" Click="AddCat"/>
+                <Button Content="Gestisci Gatti" Click="ManageCat"/>
+=======
+            <MenuItem Header="Menu Gatti" Click="MenuItem_Click">
+                <Button Click="AddCatButton_Click"/>
+                <Button Click="ManageCatButton_Click"/>
+>>>>>>> 5c76610043a71afb708bc10d90944dfd06c807ca:Presentation_UI/MainWindow.xaml
+            </MenuItem>
+        </Menu>
+        <Menu HorizontalAlignment="Center" Height="50" VerticalAlignment="Top" Width="254" Background="#FF032050" FontWeight="Bold" FontSize="24" FontStyle="Italic">
+            <MenuItem Header="Menu Adozioni" Foreground="White" Click="MenuItem_Click">
+<<<<<<< HEAD:UI_WPF/MainWindow.xaml
+                <Button Content="Aggiungi Adozione" Click="AddAdoption"/>
+                <Button Content="Gestisci Gatti" Click="ManageAdoptions"/>
+            </MenuItem>
+            
+        </Menu>
+        <Menu HorizontalAlignment="Left" Height="50" VerticalAlignment="Top" Width="273" Background="#FF032050" FontWeight="Bold" FontSize="24" FontStyle="Italic" Margin="527,0,0,0" Foreground="White">
+            <MenuItem Header="Menu Adottanti">
+                <Button Content="Aggiungi Adottante" Click="AddAdopter"/>
+                <Button Content="Gestisci Gatti" Click="ManageAdopter"/>
+                </MenuItem>
+
+=======
+                <Button Click="AddAdoptionButton_Click"/>
+                <Button Click="ManageAdoptionButton_Click"/>
+            </MenuItem>
+        </Menu>
+        <Menu HorizontalAlignment="Left" Height="50" VerticalAlignment="Top" Width="273" Background="#FF032050" FontWeight="Bold" FontSize="24" FontStyle="Italic" Margin="527,0,0,0" Foreground="White">
+            <MenuItem Header="Menu Adottanti">
+                <Button Click="AddAdopterButton_Click"/>
+                <Button Click="ManageAdopterButton_Click"/>
+            </MenuItem>
+>>>>>>> 5c76610043a71afb708bc10d90944dfd06c807ca:Presentation_UI/MainWindow.xaml
+        </Menu>
+            <Label Content="Numero Gatti Maschi:" HorizontalAlignment="Left" Height="44" Margin="36,115,0,0" VerticalAlignment="Top" Width="237" FontWeight="Bold" FontSize="22"/>
+        <Label Content="Numero Gatti Femmine:" HorizontalAlignment="Left" Height="44" Margin="36,159,0,0" VerticalAlignment="Top" Width="257" FontWeight="Bold" FontSize="22"/>
+        <Label Content="Numero Gatti Totali:" HorizontalAlignment="Left" Height="44" Margin="36,203,0,0" VerticalAlignment="Top" Width="237" FontWeight="Bold" FontSize="22"/>
+        <TextBlock x:Name="TxtBlockNumeroGattiMaschi" HorizontalAlignment="Left" Height="39" Margin="278,120,0,0" TextWrapping="Wrap" Text="{Binding CatDTOList.Count}" VerticalAlignment="Top" Width="216" FontWeight="Bold" FontSize="22"/>
+        <TextBlock x:Name="TxtBlockNumeroGattiFemmine" HorizontalAlignment="Center" Height="39" Margin="0,164,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Width="216" FontWeight="Bold" FontSize="22"/>
+        <TextBlock x:Name="TxtBlockNumeroGattiTotali" HorizontalAlignment="Left" Height="39" Margin="259,208,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Width="216" FontWeight="Bold" FontSize="22"/>
+    </Grid>
+</Window>
