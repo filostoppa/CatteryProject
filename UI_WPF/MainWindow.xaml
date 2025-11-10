@@ -8,13 +8,22 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <Menu HorizontalAlignment="Left" Height="50" VerticalAlignment="Top" Width="273" Background="#FF032050" FontWeight="Bold" FontSize="24" FontStyle="Italic" Foreground="White">
-            <MenuItem Header="Menu Gatti"/>
+            <MenuItem Header="Menu Gatti">
+                <Button Content="Aggiungi Gatto" Click="AddCat"/>
+                <Button Content="Gestisci Gatti" Click="ManageCats"/>
+            </MenuItem>
         </Menu>
         <Menu HorizontalAlignment="Center" Height="50" VerticalAlignment="Top" Width="254" Background="#FF032050" FontWeight="Bold" FontSize="24" FontStyle="Italic">
-            <MenuItem Header="Menu Adozioni" Foreground="White" Click="MenuItem_Click"/>
+            <MenuItem Header="Menu Adozioni" Foreground="White" Click="MenuItem_Click">
+                <Button Content="Aggiungi Adozione" Click="AddAdoption"/>
+                <Button/>
+            </MenuItem>
         </Menu>
         <Menu HorizontalAlignment="Left" Height="50" VerticalAlignment="Top" Width="273" Background="#FF032050" FontWeight="Bold" FontSize="24" FontStyle="Italic" Margin="527,0,0,0" Foreground="White">
-            <MenuItem Header="Menu Adottanti"/>
+            <MenuItem Header="Menu Adottanti">
+                <Button Content="Aggiungi Adottante" Click="AddAdopter"/>
+                <Button Content="Gestisci Adottanti" Click="ManageAdopters"/>
+            </MenuItem>
         </Menu>
         <Label Content="Numero Gatti Maschi:" HorizontalAlignment="Left" Height="44" Margin="36,115,0,0" VerticalAlignment="Top" Width="237" FontWeight="Bold" FontSize="22"/>
         <Label Content="Numero Gatti Femmine:" HorizontalAlignment="Left" Height="44" Margin="36,159,0,0" VerticalAlignment="Top" Width="257" FontWeight="Bold" FontSize="22"/>

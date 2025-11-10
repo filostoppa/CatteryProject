@@ -1,0 +1,78 @@
+﻿<Window x:Class="UI_WPF.AddAdopterWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:UI_WPF"
+        mc:Ignorable="d"
+        Title="Aggiungi Adottante" Height="700" Width="450"
+        WindowStartupLocation="CenterScreen">
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Nome -->
+        <TextBlock Grid.Row="0" Text="Nome:" Margin="0,0,0,5"/>
+        <TextBox Grid.Row="1" x:Name="txtFirstName" Margin="0,0,0,15"/>
+
+        <!-- Cognome -->
+        <TextBlock Grid.Row="2" Text="Cognome:" Margin="0,0,0,5"/>
+        <TextBox Grid.Row="3" x:Name="txtLastName" Margin="0,0,0,15"/>
+
+        <!-- Email -->
+        <TextBlock Grid.Row="4" Text="Email:" Margin="0,0,0,5"/>
+        <TextBox Grid.Row="5" x:Name="txtEmail" Margin="0,0,0,15"/>
+
+        <!-- Telefono/i -->
+        <TextBlock Grid.Row="6" Text="Telefono/i:" Margin="0,0,0,5"/>
+        <TextBox Grid.Row="7" x:Name="txtPhones" Margin="0,0,0,15" ToolTip="Puoi inserire più numeri separati da virgola"/>
+
+        <!-- Codice Fiscale -->
+        <TextBlock Grid.Row="8" Text="Codice Fiscale:" Margin="0,0,0,5"/>
+        <TextBox Grid.Row="9" x:Name="txtFiscalCode" Margin="0,0,0,15" MaxLength="16"/>
+
+        <!-- Indirizzo -->
+        <TextBlock Grid.Row="10" Text="Indirizzo:" Margin="0,0,0,5"/>
+        <TextBox Grid.Row="11" x:Name="txtAddress" Margin="0,0,0,15"/>
+
+        <!-- Città -->
+        <TextBlock Grid.Row="12" Text="Città:" Margin="0,0,0,5"/>
+        <TextBox Grid.Row="13" x:Name="txtCity" Margin="0,0,0,15"/>
+
+        <!-- CAP -->
+        <TextBlock Grid.Row="14" Text="CAP:" Margin="0,0,0,5"/>
+        <TextBox Grid.Row="15" x:Name="txtCityCap" Margin="0,0,0,15" MaxLength="5"/>
+
+        <!-- Note -->
+        <TextBlock Grid.Row="16" Text="Note:" Margin="0,0,0,5"/>
+        <TextBox Grid.Row="17" x:Name="txtNotes" 
+                 TextWrapping="Wrap" AcceptsReturn="True" 
+                 VerticalScrollBarVisibility="Auto" Height="80" Margin="0,0,0,15"/>
+
+        <!-- Pulsanti -->
+        <StackPanel Grid.Row="18" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button x:Name="btnSalva" Content="Salva" Width="80" Height="30"
+                    Margin="0,0,10,0" Click="BtnSalva_Click"/>
+            <Button x:Name="btnAnnulla" Content="Annulla" Width="80" Height="30"
+                    Click="BtnAnnulla_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>

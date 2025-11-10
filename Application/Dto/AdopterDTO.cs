@@ -12,6 +12,7 @@ namespace Application.Dto
         string? FirstName,
         string? LastName,
         string? Address,
+        string? Notes,
         string? Phone,
         string? FiscalCode, 
         string? City, 
