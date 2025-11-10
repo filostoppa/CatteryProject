@@ -1,4 +1,5 @@
 ﻿using Application.Dto;
+using Application.Interfaces;
 using Application.Mappers;
 using Domain.Model.Entities;
 using System;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Application.UseCases
 {
-    public class CatService
+    public class CatService : ICatRepository
     {
         private readonly List<Cat> _cats;
 
@@ -115,5 +116,28 @@ namespace Application.UseCases
             return false;
         }
 
+        private List<CatDTO> cats = new List<CatDTO>();
+
+        public bool DeleteCat(string id)
+        {
+            CatDTO catToDelete = null;
+
+            foreach (CatDTO cat in cats)
+            {
+                if (cat.Name == id)  // Usa .Name come chiave
+                {
+                    catToDelete = cat;
+                    break;
+                }
+            }
+
+            if (catToDelete == null)
+            {
+                return false;
+            }
+
+            cats.Remove(catToDelete);
+            return true;
+        }
     }
 }
