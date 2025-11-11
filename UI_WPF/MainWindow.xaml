@@ -16,7 +16,7 @@
         <Menu HorizontalAlignment="Center" Height="50" VerticalAlignment="Top" Width="254" Background="#FF032050" FontWeight="Bold" FontSize="24" FontStyle="Italic">
             <MenuItem Header="Menu Adozioni" Foreground="White" Click="MenuItem_Click">
                 <Button Content="Aggiungi Adozione" Click="AddAdoption"/>
-                <Button/>
+                <Button Content="Gestisci Adozioni" Click="ManageAdoptions"/>
             </MenuItem>
         </Menu>
         <Menu HorizontalAlignment="Left" Height="50" VerticalAlignment="Top" Width="273" Background="#FF032050" FontWeight="Bold" FontSize="24" FontStyle="Italic" Margin="527,0,0,0" Foreground="White">

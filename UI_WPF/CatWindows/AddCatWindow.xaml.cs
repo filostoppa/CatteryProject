@@ -20,7 +20,6 @@ namespace UI_WPF
 
         private void BtnSalva_Click(object sender, RoutedEventArgs e)
         {
-            // Validation
             if (string.IsNullOrWhiteSpace(txtName.Text))
             {
                 MessageBox.Show("Inserisci il nome del gatto.", "Attenzione",
@@ -36,7 +35,6 @@ namespace UI_WPF
                 return;
             }
 
-            // Create new cat DTO
             NewCat = new CatDTO(
                 Name: txtName.Text.Trim(),
                 Breed: string.IsNullOrWhiteSpace(txtBreed.Text) ? null : txtBreed.Text.Trim(),

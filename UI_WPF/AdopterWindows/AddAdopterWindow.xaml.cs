@@ -17,7 +17,6 @@ namespace UI_WPF
 
         private void BtnSalva_Click(object sender, RoutedEventArgs e)
         {
-            // === VALIDAZIONI ===
             if (string.IsNullOrWhiteSpace(txtFirstName.Text))
             {
                 ShowError("Inserisci il nome.", txtFirstName);
@@ -48,7 +47,6 @@ namespace UI_WPF
                 return;
             }
 
-            // === CREAZIONE DTO ===
             NewAdopter = new AdopterDTO(
                 FirstName: txtFirstName.Text.Trim(),
                 LastName: txtLastName.Text.Trim(),

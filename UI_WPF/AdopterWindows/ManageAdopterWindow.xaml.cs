@@ -63,7 +63,7 @@ namespace UI_WPF
 
         private void BtnAggiorna_Click(object sender, RoutedEventArgs e)
         {
-            LoadAdopters(); // Ricarica da DB
+            LoadAdopters();
             MessageBox.Show("Elenco aggiornato.", "Info", MessageBoxButton.OK, MessageBoxImage.Information);
         }
     }

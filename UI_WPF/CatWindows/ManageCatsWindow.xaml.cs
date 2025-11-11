@@ -13,15 +13,15 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Application.UseCases;
+using Application.Mappers;
 
 namespace UI_WPF
 {
-    /// <summary>
-    /// Logica di interazione per ManageCatsWindow.xaml
-    /// </summary>
     public partial class ManageCatsWindow : Window
     {
         public ObservableCollection<CatDTO> Cats { get; set; }
+        private readonly CatService catService;
 
         public ManageCatsWindow()
         {
@@ -33,13 +33,11 @@ namespace UI_WPF
 
         private void LoadCats()
         {
-            // TODO: Load cats from database using your service/repository
-            // Example:
-            // var cats = catService.GetAll();
-            // foreach (var cat in cats)
-            // {
-            //     Cats.Add(cat);
-            // }
+            var cats = catService.GetAllCats();
+            foreach (var cat in cats)
+            {
+                Cats.Add(cat);
+            }
         }
 
         private void BtnAggiungi_Click(object sender, RoutedEventArgs e)
@@ -49,8 +47,7 @@ namespace UI_WPF
             {
                 CatDTO newCat = addWindow.NewCat;
 
-                // TODO: Save to database using your service/repository
-                // catService.Add(CatMapper.ToEntity(newCat));
+                catService.AddCat(newCat);
 
                 Cats.Add(newCat);
             }
