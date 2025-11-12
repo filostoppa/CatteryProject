@@ -11,6 +11,7 @@ namespace Infrastracture.Persistance.DTO
         string? FirstName,
         string? LastName,
         string? Address,
+        string? Notes,
         string? Phone,
         string? FiscalCode,
         string? City,

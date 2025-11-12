@@ -1,4 +1,6 @@
 ﻿using Application.Dto;
+using Application.Mappers;
+using Application.UseCases;
 using System;
 using System.Collections.ObjectModel;
 using System.Windows;
@@ -9,18 +11,25 @@ namespace UI_WPF
     public partial class ManageAdoptersWindow : Window
     {
         private ObservableCollection<AdopterDTO> _adopters;
+        private readonly AdopterService _adopterService;
 
         public ManageAdoptersWindow()
         {
             InitializeComponent();
+            _adopterService = ServiceManager.Instance.AdopterService;
+            _adopters = new ObservableCollection<AdopterDTO>();
+            lstAdopters.ItemsSource = _adopters;
             LoadAdopters();
         }
 
         private void LoadAdopters()
         {
-            _adopters = new ObservableCollection<AdopterDTO>{};
-
-            lstAdopters.ItemsSource = _adopters;
+            _adopters.Clear();
+            var adopters = _adopterService.GetAllAdopters();
+            foreach (var adopter in adopters)
+            {
+                _adopters.Add(AdopterMapper.ToDTO(adopter));
+            }
         }
 
         private void LstAdopters_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -35,13 +44,15 @@ namespace UI_WPF
             var addWindow = new AddAdopterWindow();
             if (addWindow.ShowDialog() == true)
             {
-                _adopters.Add(addWindow.NewAdopter);
+                // L'adottante è già stato salvato in AddAdopterWindow, basta ricaricare
+                LoadAdopters();
             }
         }
 
         private void BtnModifica_Click(object sender, RoutedEventArgs e)
         {
-            
+            MessageBox.Show("Funzionalità di modifica da implementare.", "Info",
+                MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
         private void BtnElimina_Click(object sender, RoutedEventArgs e)
@@ -56,7 +67,9 @@ namespace UI_WPF
 
                 if (result == MessageBoxResult.Yes)
                 {
-                    _adopters.Remove(adopter);
+                    var adopterEntity = AdopterMapper.ToEntity(adopter);
+                    _adopterService.Remove(adopterEntity);
+                    LoadAdopters();
                 }
             }
         }

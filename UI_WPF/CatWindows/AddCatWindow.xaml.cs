@@ -1,4 +1,5 @@
 ﻿using Application.Dto;
+using Application.UseCases;
 using System;
 using System.Windows;
 using System.Windows.Controls;
@@ -11,10 +12,12 @@ namespace UI_WPF
     public partial class AddCatWindow : Window
     {
         public CatDTO NewCat { get; private set; }
+        private readonly CatService _catService;
 
         public AddCatWindow()
         {
             InitializeComponent();
+            _catService = ServiceManager.Instance.CatService;
             dpArrivalDate.SelectedDate = DateTime.Today;
         }
 
@@ -48,6 +51,12 @@ namespace UI_WPF
                 ArrivalDate: DateOnly.FromDateTime(dpArrivalDate.SelectedDate.Value),
                 Description: string.IsNullOrWhiteSpace(txtDescription.Text) ? null : txtDescription.Text.Trim()
             );
+
+            // Salva direttamente nel service (e quindi nel JSON)
+            _catService.AddCat(NewCat);
+
+            MessageBox.Show("Gatto aggiunto con successo!", "Successo",
+                MessageBoxButton.OK, MessageBoxImage.Information);
 
             DialogResult = true;
             Close();

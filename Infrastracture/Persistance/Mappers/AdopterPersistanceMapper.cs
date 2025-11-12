@@ -21,6 +21,7 @@ namespace Infrastracture.Persistance.Mappers
                 FirstName: adopter.FirstName,
                 LastName: adopter.LastName,
                 Address: adopter.Address.ToString(),
+                Notes: adopter.Notes,
                 Phone: adopter.Phone.ToString(),
                 FiscalCode: adopter.FiscalCode.ToString(),
                 City: adopter.City,
@@ -41,7 +42,7 @@ namespace Infrastracture.Persistance.Mappers
             FiscalCode fiscal = new FiscalCode(dto.FiscalCode);
             Cap cap = new Cap(dto.CityCap);
 
-            return new Adopter(dto.FirstName, dto.LastName, email, phone, fiscal, dto.City, cap);
+            return new Adopter(dto.FirstName, dto.LastName, email, dto.Notes ?? "", phone, fiscal, dto.City, cap);
         }
 
         // Converte un AdopterPersistanceDTO in AdopterDTO
@@ -52,7 +53,7 @@ namespace Infrastracture.Persistance.Mappers
                 throw new ArgumentNullException(nameof(dto));
             }
 
-            return new AdopterDTO(dto.FirstName, dto.LastName, dto.Address, dto.Phone, dto.FiscalCode, dto.City, dto.CityCap);
+            return new AdopterDTO(dto.FirstName, dto.LastName, dto.Address, dto.Notes, dto.Phone, dto.FiscalCode, dto.City, dto.CityCap);
         }
 
         // Converte un AdopterDTO in AdopterPersistanceDTO
@@ -63,7 +64,7 @@ namespace Infrastracture.Persistance.Mappers
                 throw new ArgumentNullException(nameof(dto));
             }
 
-            return new AdopterPersistanceDTO(dto.FirstName, dto.LastName, dto.Address, dto.Phone, dto.FiscalCode, dto.City, dto.CityCap);
+            return new AdopterPersistanceDTO(dto.FirstName, dto.LastName, dto.Address, dto.Notes, dto.Phone, dto.FiscalCode, dto.City, dto.CityCap);
         }
     }
 }

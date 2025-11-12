@@ -1,25 +1,37 @@
 ﻿using Application.Dto;
+using Application.Interfaces;
 using Application.Mappers;
 using Domain.Model.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Application.UseCases
 {
     public class CatService
     {
         private readonly List<Cat> _cats;
+        private readonly ICatteryRepository _repository;
 
-        // Creo la lista dei gatti
-        public CatService()
+        public CatService(ICatteryRepository repository)
         {
+            _repository = repository ?? throw new ArgumentNullException(nameof(repository));
             _cats = new List<Cat>();
+            LoadFromRepository();
         }
 
-        // Aggiunge un gatto alla lista
+        private void LoadFromRepository()
+        {
+            var cats = _repository.LoadCats();
+            _cats.Clear();
+            _cats.AddRange(cats);
+        }
+
+        private void SaveToRepository()
+        {
+            _repository.SaveCats(_cats);
+        }
+
         public CatDTO AddCat(CatDTO dto)
         {
             if (dto == null)
@@ -29,10 +41,10 @@ namespace Application.UseCases
 
             Cat cat = CatMapper.ToEntity(dto);
             _cats.Add(cat);
+            SaveToRepository();
             return cat.ToDTO();
         }
 
-        // Restituisce tutti i gatti come lista di DTO
         public List<CatDTO> GetAllCats()
         {
             List<CatDTO> result = new List<CatDTO>();
@@ -43,7 +55,6 @@ namespace Application.UseCases
             return result;
         }
 
-        // Cerca un gatto per ID
         public CatDTO? GetById(string id)
         {
             if (string.IsNullOrWhiteSpace(id))
@@ -61,7 +72,6 @@ namespace Application.UseCases
             return null;
         }
 
-        // Trova i gatti senza data di uscita dal gattile
         public List<CatDTO> GetAvailableCats()
         {
             List<CatDTO> result = new List<CatDTO>();
@@ -75,7 +85,6 @@ namespace Application.UseCases
             return result;
         }
 
-        // Aggiorna la data di uscita di un gatto
         public bool UpdateDepartureDate(string id, DateOnly? departureDate)
         {
             if (string.IsNullOrWhiteSpace(id))
@@ -89,13 +98,13 @@ namespace Application.UseCases
                 if (cat.ID == id)
                 {
                     cat.UpdateDepartureDate(departureDate);
+                    SaveToRepository();
                     return true;
                 }
             }
             return false;
         }
 
-        // Rimuove un gatto dalla lista per ID
         public bool RemoveById(string id)
         {
             if (string.IsNullOrWhiteSpace(id))
@@ -109,11 +118,11 @@ namespace Application.UseCases
                 if (cat.ID == id)
                 {
                     _cats.RemoveAt(i);
+                    SaveToRepository();
                     return true;
                 }
             }
             return false;
         }
-
     }
 }

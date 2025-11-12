@@ -1,6 +1,7 @@
 ﻿using Domain.Model.Entities;
 using Infrastracture.Persistance.DTO;
 using Infrastracture.Persistance.Mappers;
+using Application.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -8,12 +9,11 @@ using System.Text.Json;
 
 namespace Infrastracture.Persistance.Repositories
 {
-    public class JsonCatteryRepository
+    public class JsonCatteryRepository : ICatteryRepository
     {
         private readonly string _dataFolder;
         private readonly JsonSerializerOptions _serializerOptions;
 
-        // Inizializza la cartella e le opzioni JSON
         public JsonCatteryRepository()
         {
             _dataFolder = "Data";
@@ -24,7 +24,6 @@ namespace Infrastracture.Persistance.Repositories
             }
         }
 
-        // Salva i gatti in un file JSON
         public bool SaveCats(List<Cat> cats)
         {
             if (cats == null) throw new ArgumentNullException(nameof(cats));
@@ -41,7 +40,6 @@ namespace Infrastracture.Persistance.Repositories
             return true;
         }
 
-        // Carica i gatti dal file JSON
         public List<Cat> LoadCats()
         {
             string path = Path.Combine(_dataFolder, "cats.json");
@@ -72,7 +70,6 @@ namespace Infrastracture.Persistance.Repositories
             return result;
         }
 
-        // Salva gli adottanti in un file JSON
         public bool SaveAdopters(List<Adopter> adopters)
         {
             if (adopters == null) throw new ArgumentNullException(nameof(adopters));
@@ -89,7 +86,6 @@ namespace Infrastracture.Persistance.Repositories
             return true;
         }
 
-        // Carica gli adottanti dal file JSON
         public List<Adopter> LoadAdopters()
         {
             string path = Path.Combine(_dataFolder, "adopters.json");
@@ -120,7 +116,6 @@ namespace Infrastracture.Persistance.Repositories
             return result;
         }
 
-        // Salva le adozioni in un file JSON
         public bool SaveAdoptions(List<Adoption> adoptions)
         {
             if (adoptions == null) throw new ArgumentNullException(nameof(adoptions));
@@ -137,7 +132,6 @@ namespace Infrastracture.Persistance.Repositories
             return true;
         }
 
-        // Carica le adozioni dal file JSON
         public List<Adoption> LoadAdoptions()
         {
             string path = Path.Combine(_dataFolder, "adoptions.json");

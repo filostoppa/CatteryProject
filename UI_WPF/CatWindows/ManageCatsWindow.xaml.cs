@@ -21,11 +21,12 @@ namespace UI_WPF
     public partial class ManageCatsWindow : Window
     {
         public ObservableCollection<CatDTO> Cats { get; set; }
-        private readonly CatService catService;
+        private readonly CatService _catService;
 
         public ManageCatsWindow()
         {
             InitializeComponent();
+            _catService = ServiceManager.Instance.CatService;
             Cats = new ObservableCollection<CatDTO>();
             lstCats.ItemsSource = Cats;
             LoadCats();
@@ -33,7 +34,8 @@ namespace UI_WPF
 
         private void LoadCats()
         {
-            var cats = catService.GetAllCats();
+            Cats.Clear();
+            var cats = _catService.GetAllCats();
             foreach (var cat in cats)
             {
                 Cats.Add(cat);
@@ -45,11 +47,8 @@ namespace UI_WPF
             var addWindow = new AddCatWindow();
             if (addWindow.ShowDialog() == true)
             {
-                CatDTO newCat = addWindow.NewCat;
-
-                catService.AddCat(newCat);
-
-                Cats.Add(newCat);
+                // Il gatto è già stato salvato in AddCatWindow, basta ricaricare
+                LoadCats();
             }
         }
 
@@ -63,8 +62,6 @@ namespace UI_WPF
             }
 
             CatDTO selectedCat = (CatDTO)lstCats.SelectedItem;
-
-            // TODO: Open edit window with selected cat data
             MessageBox.Show("Funzionalità di modifica da implementare.", "Info",
                 MessageBoxButton.OK, MessageBoxImage.Information);
         }
@@ -88,17 +85,17 @@ namespace UI_WPF
 
             if (result == MessageBoxResult.Yes)
             {
-                // TODO: Delete from database using your service/repository
-                // catService.Delete(selectedCat.Id);
-
-                Cats.Remove(selectedCat);
+                // Trova il gatto entity per ottenere l'ID
+                var catEntity = CatMapper.ToEntity(selectedCat);
+                _catService.RemoveById(catEntity.ID);
+                LoadCats();
             }
         }
 
         private void BtnAggiorna_Click(object sender, RoutedEventArgs e)
         {
-            Cats.Clear();
             LoadCats();
+            MessageBox.Show("Elenco aggiornato.", "Info", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
         private void LstCats_SelectionChanged(object sender, SelectionChangedEventArgs e)

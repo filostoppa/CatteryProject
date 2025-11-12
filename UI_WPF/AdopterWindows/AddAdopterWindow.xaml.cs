@@ -1,4 +1,6 @@
 ﻿using Application.Dto;
+using Application.Mappers;
+using Application.UseCases;
 using System;
 using System.Text.RegularExpressions;
 using System.Windows;
@@ -9,10 +11,12 @@ namespace UI_WPF
     public partial class AddAdopterWindow : Window
     {
         public AdopterDTO NewAdopter { get; private set; }
+        private readonly AdopterService _adopterService;
 
         public AddAdopterWindow()
         {
             InitializeComponent();
+            _adopterService = ServiceManager.Instance.AdopterService;
         }
 
         private void BtnSalva_Click(object sender, RoutedEventArgs e)
@@ -50,13 +54,20 @@ namespace UI_WPF
             NewAdopter = new AdopterDTO(
                 FirstName: txtFirstName.Text.Trim(),
                 LastName: txtLastName.Text.Trim(),
-                Address: string.IsNullOrWhiteSpace(txtAddress.Text) ? null : txtAddress.Text.Trim(),
+                Address: string.IsNullOrWhiteSpace(txtEmail.Text) ? null : txtEmail.Text.Trim(),
+                Notes: string.IsNullOrWhiteSpace(txtNotes.Text) ? null : txtNotes.Text.Trim(),
                 Phone: string.IsNullOrWhiteSpace(txtPhones.Text) ? null : txtPhones.Text.Trim(),
                 FiscalCode: string.IsNullOrWhiteSpace(txtFiscalCode.Text) ? null : txtFiscalCode.Text.Trim().ToUpper(),
                 City: string.IsNullOrWhiteSpace(txtCity.Text) ? null : txtCity.Text.Trim(),
-                CityCap: string.IsNullOrWhiteSpace(txtCityCap.Text) ? null : txtCityCap.Text.Trim(),
-                Notes: string.IsNullOrWhiteSpace(txtNotes.Text) ? null : txtNotes.Text.Trim()
+                CityCap: string.IsNullOrWhiteSpace(txtCityCap.Text) ? null : txtCityCap.Text.Trim()
             );
+
+            // Converti in Entity e salva direttamente nel service
+            var adopterEntity = AdopterMapper.ToEntity(NewAdopter);
+            _adopterService.AddAdopter(adopterEntity);
+
+            MessageBox.Show("Adottante aggiunto con successo!", "Successo",
+                MessageBoxButton.OK, MessageBoxImage.Information);
 
             DialogResult = true;
             Close();

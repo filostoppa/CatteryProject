@@ -5,8 +5,91 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:UI_WPF.AdoptionWindows"
         mc:Ignorable="d"
-        Title="ManageAdoptionsWindow" Height="450" Width="800">
-    <Grid>
-        
+        Title="Gestione Adozioni" Height="550" Width="800"
+        WindowStartupLocation="CenterScreen">
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Titolo -->
+        <TextBlock Grid.Row="0" 
+                   Text="Elenco Adozioni" 
+                   FontSize="18" 
+                   FontWeight="Bold" 
+                   Margin="0,0,0,15"/>
+
+        <!-- Lista Adozioni -->
+        <ListBox Grid.Row="1" 
+                 x:Name="lstAdoptions" 
+                 Margin="0,0,0,15"
+                 SelectionChanged="LstAdoptions_SelectionChanged">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Margin="8,5">
+                        <!-- Gatto adottato -->
+                        <TextBlock FontWeight="Bold" FontSize="14">
+                            <Run Text="Gatto: "/>
+                            <Run Text="{Binding AdoptedCat.Name}"/>
+                        </TextBlock>
+
+                        <!-- Razza del gatto -->
+                        <TextBlock Foreground="#555" FontSize="12">
+                            <Run Text="Razza: "/>
+                            <Run Text="{Binding AdoptedCat.Breed}"/>
+                        </TextBlock>
+
+                        <!-- Adottante -->
+                        <TextBlock Foreground="#555" FontSize="12">
+                            <Run Text="Adottante: "/>
+                            <Run Text="{Binding AdopterData.FirstName}"/>
+                            <Run Text=" "/>
+                            <Run Text="{Binding AdopterData.LastName}"/>
+                        </TextBlock>
+
+                        <!-- Email adottante -->
+                        <TextBlock Foreground="#555" FontSize="12">
+                            <Run Text="Email: "/>
+                            <Run Text="{Binding AdopterData.Email}"/>
+                        </TextBlock>
+
+                        <!-- Data adozione -->
+                        <TextBlock Foreground="#777" FontStyle="Italic" FontSize="11">
+                            <Run Text="Data adozione: "/>
+                            <Run Text="{Binding AdoptionDate, StringFormat=dd/MM/yyyy}"/>
+                        </TextBlock>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <!-- Pulsanti -->
+        <StackPanel Grid.Row="2" 
+                    Orientation="Horizontal" 
+                    HorizontalAlignment="Right">
+            <Button x:Name="btnAggiungi" 
+                    Content="Aggiungi" 
+                    Width="90" Height="35"
+                    Margin="0,0,10,0" 
+                    Click="BtnAggiungi_Click"/>
+            <Button x:Name="btnModifica" 
+                    Content="Modifica" 
+                    Width="90" Height="35"
+                    Margin="0,0,10,0" 
+                    Click="BtnModifica_Click" 
+                    IsEnabled="False"/>
+            <Button x:Name="btnElimina" 
+                    Content="Elimina" 
+                    Width="90" Height="35"
+                    Margin="0,0,10,0" 
+                    Click="BtnElimina_Click" 
+                    IsEnabled="False"/>
+            <Button x:Name="btnAggiorna" 
+                    Content="Aggiorna" 
+                    Width="90" Height="35"
+                    Click="BtnAggiorna_Click"/>
+        </StackPanel>
     </Grid>
 </Window>
