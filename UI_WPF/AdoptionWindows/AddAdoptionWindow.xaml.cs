@@ -32,7 +32,7 @@ namespace UI_WPF.AdoptionWindows
         private void LoadAvailableData()
         {
             // Carica i gatti disponibili (senza data di partenza)
-            availableCats = _catService.GetAvailableCats();
+            availableCats = _catService.GetAllCats();
 
             // Carica tutti gli adottanti
             availableAdopters = _adopterService.GetAllAdopters()
@@ -45,7 +45,6 @@ namespace UI_WPF.AdoptionWindows
 
         private void BtnSalva_Click(object sender, RoutedEventArgs e)
         {
-            // Validation
             if (cmbCat.SelectedItem == null)
             {
                 MessageBox.Show("Seleziona un gatto.", "Attenzione",
@@ -73,7 +72,6 @@ namespace UI_WPF.AdoptionWindows
             AdopterDTO selectedAdopter = (AdopterDTO)cmbAdopter.SelectedItem;
             DateOnly adoptionDate = DateOnly.FromDateTime(dpAdoptionDate.SelectedDate.Value);
 
-            // Validate adoption date against cat's arrival date
             if (selectedCat.ArrivalDate > adoptionDate)
             {
                 MessageBox.Show("La data di adozione non può essere precedente alla data di arrivo del gatto.",
@@ -81,13 +79,14 @@ namespace UI_WPF.AdoptionWindows
                 return;
             }
 
-            // Create new adoption DTO
             NewAdoption = new AdoptionDTO(
                 AdoptedCat: selectedCat,
                 AdoptionDate: adoptionDate,
                 AdopterData: selectedAdopter,
                 Status: true
             );
+
+            _adopterService.AddAdopter(AdopterMapper.ToEntity(selectedAdopter));
 
             DialogResult = true;
             Close();

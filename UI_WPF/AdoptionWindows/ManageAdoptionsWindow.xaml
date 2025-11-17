@@ -73,13 +73,15 @@
                     Content="Aggiungi" 
                     Width="90" Height="35"
                     Margin="0,0,10,0" 
-                    Click="BtnAggiungi_Click"/>
+                    Click="BtnAggiungi_Click"
+                    Visibility="Collapsed"/>
             <Button x:Name="btnModifica" 
                     Content="Modifica" 
                     Width="90" Height="35"
                     Margin="0,0,10,0" 
                     Click="BtnModifica_Click" 
-                    IsEnabled="False"/>
+                    IsEnabled="False"
+                    Visibility="Collapsed"/>
             <Button x:Name="btnElimina" 
                     Content="Elimina" 
                     Width="90" Height="35"

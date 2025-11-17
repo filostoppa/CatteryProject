@@ -24,7 +24,6 @@ namespace UI_WPF
 
         private void LoadAdopters()
         {
-            _adopters.Clear();
             var adopters = _adopterService.GetAllAdopters();
             foreach (var adopter in adopters)
             {

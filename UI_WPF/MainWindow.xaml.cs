@@ -25,7 +25,6 @@ namespace UI_WPF
         {
             InitializeComponent();
 
-            // Inizializza il ServiceManager con il repository concreto
             var repository = new JsonCatteryRepository();
             ServiceManager.Initialize(repository);
 

@@ -109,7 +109,6 @@ namespace Infrastracture.Persistance.Repositories
                 }
                 catch
                 {
-                    // Ignora errori
                 }
             }
 

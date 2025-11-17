@@ -38,7 +38,6 @@ namespace UI_WPF.AdoptionWindows
 
         private void LoadAdoptions()
         {
-            Adoptions.Clear();
             var adoptions = _adoptionService.GetAllAdoptions();
             foreach (var adoption in adoptions)
             {
